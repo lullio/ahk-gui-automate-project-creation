@@ -1,0 +1,93 @@
+<html>
+
+<head>
+      <style>
+            body {
+                  text-align: center;
+            }
+
+            h1 {
+                  color: rgb(101, 7, 239)
+            }
+
+            button {
+                  cursor: pointer;
+                  background-color: black;
+                  color: white;
+                  width: 300px;
+                  padding: 1em;
+                  margin: 0.5em;
+            }
+      </style>
+      <title>DOM Access</title>
+</head>
+
+<body>
+      <h1>Test Yourself</h1>
+      <h2>getElementsByClassName()</h2>
+      <div>
+            <button onclick="green()" class="green undo">Click to change this to green</button>
+            <button class="blue undo" onclick="blue()">Click to change this to blue</button>
+            <button class="red undo" onclick="red()">Click to change this to red</button>
+            <button class="undo" onclick="undo()">Undo</button>
+      </div>
+      <script>
+            function green() {
+                  // complete the code within here, using getElementsByClassName
+                  let green = document.getElementsByClassName('green');
+                  for (one of green) {
+                        if (one.style.backgroundColor == "green") {
+                              one.style.backgroundColor = "black"
+                              one.textContent = "Click to change this to green"
+                        } else {
+                              one.style.backgroundColor = "green"
+                              one.textContent = "Click to back the color to black"
+                        }
+                  }
+            }
+
+            function blue() {
+                  // complete the code within here, using getElementsByClassName
+                  let blue = document.getElementsByClassName('blue')[0].backgroundColor = "blue";
+            }
+
+            function red() {
+                  // complete the code within here, using getElementsByClassName
+                  let red = document.getElementsByClassName("red");
+                  for (one of red) {
+                        one.style.backgroundColor = "red";
+                  }
+            }
+
+            function undo() {
+                  // complete the code within here. Note: this will be different code to the other functions above.
+                  let undo = document.getElementsByClassName('undo')
+                  for (bob of undo) {
+                        bob.style.backgroundColor = "black";
+                  }
+            }
+      </script>
+      <script>
+            // outra forma de fazer bem legal(remover os onclick="" dos botoes)
+            // retorna uma HTMLCollection (lista de elementos html)
+            // usar for e for of loop, forEach não funciona.
+            let arr = document.getElementsByTagName('button');
+            for (let i = 0; i < arr.length; i++) {
+                  arr[i].onmousedown = () => {
+                        if (arr[i].textContent.includes("red")) {
+                              arr[i].style.backgroundColor = "red";
+                        } else if (arr[i].textContent.includes("blue")) {
+                              arr[i].style.backgroundColor = "blue";
+                        } else if (arr[i].textContent.includes("green")) {
+                              arr[i].style.backgroundColor = "green";
+                        } else {
+                              for (botao of arr) {
+                                    botao.style.backgroundColor = "black";
+                              }
+                        }
+                  }
+            }
+      </script>
+</body>
+
+</html>
