@@ -57,44 +57,44 @@ if not A_IsAdmin
 
 { ; TEMPLATES FILES JAVASCRIPT
    ; js-dom-1
-   FileRead, jsDomTemplate1, H:\My Drive\autohotkey\Meus-Scripts\GUIS-SCRIPTS\TEMPLATE-FILES\DOM\js-dom-1.js   
+   FileRead, jsDomTemplate1, TEMPLATE-FILES\DOM\js-dom-1.js   
    ; js-dom-2
-   FileRead, jsDomTemplate2, H:\My Drive\autohotkey\Meus-Scripts\GUIS-SCRIPTS\TEMPLATE-FILES\DOM\js-dom-2.js   
+   FileRead, jsDomTemplate2, TEMPLATE-FILES\DOM\js-dom-2.js   
    ; js-regex-1
-   FileRead, jsRegexTemplate1, H:\My Drive\autohotkey\Meus-Scripts\GUIS-SCRIPTS\TEMPLATE-FILES\JS\js-regex-1.js   
+   FileRead, jsRegexTemplate1, TEMPLATE-FILES\JS\js-regex-1.js   
    ; js-clean-1
-   FileRead, jsCleanTemplate11, H:\My Drive\autohotkey\Meus-Scripts\GUIS-SCRIPTS\TEMPLATE-FILES\CLEAN\js-clean-1.js   
+   FileRead, jsCleanTemplate11, TEMPLATE-FILES\CLEAN\js-clean-1.js   
    ; js-nodejs-1
-   FileRead, jsNodejsTemplate1, H:\My Drive\autohotkey\Meus-Scripts\GUIS-SCRIPTS\TEMPLATE-FILES\JS\js-nodejs-1.js   
+   FileRead, jsNodejsTemplate1, TEMPLATE-FILES\JS\js-nodejs-1.js   
    ; js-expressjs-complete-server.js-1
-   FileRead, jsExpressjsCompleteServerjsTemplate1, H:\My Drive\autohotkey\Meus-Scripts\GUIS-SCRIPTS\TEMPLATE-FILES\JS\js-expressjs-complete-server.js-1.js   
+   FileRead, jsExpressjsCompleteServerjsTemplate1, TEMPLATE-FILES\JS\js-expressjs-complete-server.js-1.js   
    ; js-expressjs-complete-script.js-1
-   FileRead, jsExpressjsCompleteScriptjsTemplate1, H:\My Drive\autohotkey\Meus-Scripts\GUIS-SCRIPTS\TEMPLATE-FILES\JS\js-expressjs-complete-script.js-1.js   
+   FileRead, jsExpressjsCompleteScriptjsTemplate1, TEMPLATE-FILES\JS\js-expressjs-complete-script.js-1.js   
    ; js-expressjs-1
-   FileRead, jsExpressjsTemplate1, H:\My Drive\autohotkey\Meus-Scripts\GUIS-SCRIPTS\TEMPLATE-FILES\JS\js-expressjs-1.js   
+   FileRead, jsExpressjsTemplate1, TEMPLATE-FILES\JS\js-expressjs-1.js   
 }
 
 { ; TEMPLATE FILES HTML
    ; html-dom-1
-   FileRead, htmlDomTemplate1, H:\My Drive\autohotkey\Meus-Scripts\GUIS-SCRIPTS\TEMPLATE-FILES\DOM\html-dom-1.html   
+   FileRead, htmlDomTemplate1, TEMPLATE-FILES\DOM\html-dom-1.html   
    ; html-dom-2
-   FileRead, htmlDomTemplate2, H:\My Drive\autohotkey\Meus-Scripts\GUIS-SCRIPTS\TEMPLATE-FILES\DOM\html-dom-2.html
+   FileRead, htmlDomTemplate2, TEMPLATE-FILES\DOM\html-dom-2.html
    ; html-dom-2-answer
-   FileRead, htmlDomTemplate2Answer, H:\My Drive\autohotkey\Meus-Scripts\GUIS-SCRIPTS\TEMPLATE-FILES\DOM\html-dom-2-answer.html
+   FileRead, htmlDomTemplate2Answer, TEMPLATE-FILES\DOM\html-dom-2-answer.html
    ; html-dom-3
-   FileRead, htmlDomTemplate3, H:\My Drive\autohotkey\Meus-Scripts\GUIS-SCRIPTS\TEMPLATE-FILES\DOM\html-dom-3.html
+   FileRead, htmlDomTemplate3, TEMPLATE-FILES\DOM\html-dom-3.html
    ; html-dom-3-answer
-   FileRead, htmlDomTemplate3Answer, H:\My Drive\autohotkey\Meus-Scripts\GUIS-SCRIPTS\TEMPLATE-FILES\DOM\html-dom-3-answer.html
+   FileRead, htmlDomTemplate3Answer, TEMPLATE-FILES\DOM\html-dom-3-answer.html
    ; html-dom-nodes-1
-   FileRead, htmlDomNodeTemplate1, H:\My Drive\autohotkey\Meus-Scripts\GUIS-SCRIPTS\TEMPLATE-FILES\DOM\html-dom-nodes-1.html   
+   FileRead, htmlDomNodeTemplate1, TEMPLATE-FILES\DOM\html-dom-nodes-1.html   
    ; html-dom-traversing-1
-   FileRead, htmlDomTraversingTemplate1, H:\My Drive\autohotkey\Meus-Scripts\GUIS-SCRIPTS\TEMPLATE-FILES\DOM\html-dom-traversing-1.html  
+   FileRead, htmlDomTraversingTemplate1, TEMPLATE-FILES\DOM\html-dom-traversing-1.html  
    ; html-clean-1
-   FileRead, htmlCleanTemplate1, H:\My Drive\autohotkey\Meus-Scripts\GUIS-SCRIPTS\TEMPLATE-FILES\CLEAN\html-clean-1.html 
+   FileRead, htmlCleanTemplate1, TEMPLATE-FILES\CLEAN\html-clean-1.html 
    ; html-cloning-1
-   FileRead, htmlDomCloningTemplate1, H:\My Drive\autohotkey\Meus-Scripts\GUIS-SCRIPTS\TEMPLATE-FILES\DOM\html-dom-cloning-1.html
+   FileRead, htmlDomCloningTemplate1, TEMPLATE-FILES\DOM\html-dom-cloning-1.html
    ; html-regex-1
-   FileRead, htmlRegexTemplate1, H:\My Drive\autohotkey\Meus-Scripts\GUIS-SCRIPTS\TEMPLATE-FILES\JS\html-regex-1.html 
+   FileRead, htmlRegexTemplate1, TEMPLATE-FILES\JS\html-regex-1.html 
  
 }
 
