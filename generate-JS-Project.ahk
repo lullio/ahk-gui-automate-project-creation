@@ -55,7 +55,7 @@ if not A_IsAdmin
    escapeDropdownItem := "www.|"
 }
 
-{ ; TEMPLATES FILES JAVASCRIPT
+{ ; TEMPLATES FILES JAVASCRIPT DOM E JS
    ; js-dom-1
    FileRead, jsDomTemplate1, TEMPLATE-FILES\DOM\js-dom-1.js   
    ; js-dom-2
@@ -73,8 +73,51 @@ if not A_IsAdmin
    ; js-expressjs-1
    FileRead, jsExpressjsTemplate1, TEMPLATE-FILES\JS\js-expressjs-1.js   
 }
+{ ; TEMPLATE FILES JAVASCRIPT REGEX
+; js-regex-1
+FileRead, jsRegexTemplate1, TEMPLATE-FILES\REGEX\app-exercise1.js   
+; js-regex-2
+FileRead, jsRegexTemplate2, TEMPLATE-FILES\REGEX\app-exercise2.js   
+; js-regex-3
+FileRead, jsRegexTemplate3, TEMPLATE-FILES\REGEX\app-exercise3.js   
+; js-regex-4
+FileRead, jsRegexTemplate4, TEMPLATE-FILES\REGEX\app-exercise4.js   
+; js-regex-5
+FileRead, jsRegexTemplate5, TEMPLATE-FILES\REGEX\app-exercise5.js  
 
-{ ; TEMPLATE FILES HTML
+; js-regex-1-answer
+FileRead, jsRegexTemplate1Answer, TEMPLATE-FILES\REGEX\app-exercise1-answer.js
+; js-regex-2-answer
+FileRead, jsRegexTemplate2Answer, TEMPLATE-FILES\REGEX\app-exercise2-answer.js
+; js-regex-3-answer
+FileRead, jsRegexTemplate3Answer, TEMPLATE-FILES\REGEX\app-exercise3-answer.js
+; js-regex-4-answer
+FileRead, jsRegexTemplate4Answer, TEMPLATE-FILES\REGEX\app-exercise4-answer.js
+; js-regex-5-answer
+FileRead, jsRegexTemplate5Answer, TEMPLATE-FILES\REGEX\app-exercise5-answer.js
+
+; js-regex-capturing
+FileRead, jsRegexTemplateCapturing, TEMPLATE-FILES\REGEX\app-exerciseCapturingText.js
+; js-regex-Match
+FileRead, jsRegexTemplateMatch, TEMPLATE-FILES\REGEX\app-exerciseInfoAboutMatch.js
+; js-regex-Iterate
+FileRead, jsRegexTemplateIterate, TEMPLATE-FILES\REGEX\app-exerciseIterate.js
+; js-regex-Replace
+FileRead, jsRegexTemplateReplace, TEMPLATE-FILES\REGEX\app-exerciseReplace.js
+
+; js-regex-Capturing-answer
+FileRead, jsRegexTemplateCapturingAnswer, TEMPLATE-FILES\REGEX\app-exerciseCapturingText-answer.js
+; js-regex-Match-answer
+FileRead, jsRegexTemplateMatchAnswer, TEMPLATE-FILES\REGEX\app-exerciseInfoAboutMatch-answer.js
+; js-regex-Iterate-answer
+FileRead, jsRegexTemplateIterateAnswer, TEMPLATE-FILES\REGEX\app-exerciseIterate-answer.js
+; js-regex-Replace-answer
+FileRead, jsRegexTemplateReplaceAnswer, TEMPLATE-FILES\REGEX\app-exerciseReplace-answer.js
+
+
+}
+
+{ ; TEMPLATE FILES HTML DOM E CLEAN
    ; html-dom-1
    FileRead, htmlDomTemplate1, TEMPLATE-FILES\DOM\html-dom-1.html   
    ; html-dom-2
@@ -93,9 +136,32 @@ if not A_IsAdmin
    FileRead, htmlCleanTemplate1, TEMPLATE-FILES\CLEAN\html-clean-1.html 
    ; html-cloning-1
    FileRead, htmlDomCloningTemplate1, TEMPLATE-FILES\DOM\html-dom-cloning-1.html
-   ; html-regex-1
-   FileRead, htmlRegexTemplate1, TEMPLATE-FILES\JS\html-regex-1.html 
+
  
+}
+
+{ ; TEMPLATE FILES HTML REGEX
+   ; html-regex-1
+   FileRead, htmlRegexTemplate1, TEMPLATE-FILES\REGEX\index-exercise1.html
+   ; html-regex-2
+   FileRead, htmlRegexTemplate2, TEMPLATE-FILES\REGEX\index-exercise2.html
+   ; html-regex-3
+   FileRead, htmlRegexTemplate3, TEMPLATE-FILES\REGEX\index-exercise3.html
+   ; html-regex-4
+   FileRead, htmlRegexTemplate4, TEMPLATE-FILES\REGEX\index-exercise4.html
+   ; html-regex-5
+   FileRead, htmlRegexTemplate5, TEMPLATE-FILES\REGEX\index-exercise5.html
+   ; html-regex-index-exerciseCapturingText.html
+   FileRead, htmlRegexTemplateCaptureText, TEMPLATE-FILES\REGEX\index-exerciseCapturingText.html
+   ; html-regex-index-exerciseInfoAboutMatch.html
+   FileRead, htmlRegexTemplateMatch, TEMPLATE-FILES\REGEX\index-exerciseInfoAboutMatch.html
+   ; html-regex-index-exerciseIterate.html
+   FileRead, htmlRegexTemplateIterate, TEMPLATE-FILES\REGEX\index-exerciseIterate.html
+   ; html-regex-index-exerciseReplace.html
+   FileRead, htmlRegexTemplateReplace, TEMPLATE-FILES\REGEX\index-exerciseReplace.html
+   ; html-regex-intro-exercisepasswords.html
+   FileRead, htmlRegexTemplatePass, TEMPLATE-FILES\REGEX\intro-exercisepasswords.html
+
 }
 
 ; InputBox, domProjectName, Projeto JavaScript/HTML , Por favor`, insira o nome do Projeto,, 300,150, 800,500, locale, 15, DOM-
