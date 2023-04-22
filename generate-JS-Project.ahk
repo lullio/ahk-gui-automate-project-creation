@@ -74,46 +74,45 @@ if not A_IsAdmin
    FileRead, jsExpressjsTemplate1, TEMPLATE-FILES\JS\js-expressjs-1.js   
 }
 { ; TEMPLATE FILES JAVASCRIPT REGEX
-; js-regex-1
-FileRead, jsRegexTemplate1, TEMPLATE-FILES\REGEX\app-exercise1.js   
-; js-regex-2
-FileRead, jsRegexTemplate2, TEMPLATE-FILES\REGEX\app-exercise2.js   
-; js-regex-3
-FileRead, jsRegexTemplate3, TEMPLATE-FILES\REGEX\app-exercise3.js   
-; js-regex-4
-FileRead, jsRegexTemplate4, TEMPLATE-FILES\REGEX\app-exercise4.js   
-; js-regex-5
-FileRead, jsRegexTemplate5, TEMPLATE-FILES\REGEX\app-exercise5.js  
+   ; js-regex-1
+   FileRead, jsRegexTemplate1, TEMPLATE-FILES\REGEX\app-exercise1.js   
+   ; js-regex-2
+   FileRead, jsRegexTemplate2, TEMPLATE-FILES\REGEX\app-exercise2.js   
+   ; js-regex-3
+   FileRead, jsRegexTemplate3, TEMPLATE-FILES\REGEX\app-exercise3.js   
+   ; js-regex-4
+   FileRead, jsRegexTemplate4, TEMPLATE-FILES\REGEX\app-exercise4.js   
+   ; js-regex-5
+   FileRead, jsRegexTemplate5, TEMPLATE-FILES\REGEX\app-exercise5.js  
 
-; js-regex-1-answer
-FileRead, jsRegexTemplate1Answer, TEMPLATE-FILES\REGEX\app-exercise1-answer.js
-; js-regex-2-answer
-FileRead, jsRegexTemplate2Answer, TEMPLATE-FILES\REGEX\app-exercise2-answer.js
-; js-regex-3-answer
-FileRead, jsRegexTemplate3Answer, TEMPLATE-FILES\REGEX\app-exercise3-answer.js
-; js-regex-4-answer
-FileRead, jsRegexTemplate4Answer, TEMPLATE-FILES\REGEX\app-exercise4-answer.js
-; js-regex-5-answer
-FileRead, jsRegexTemplate5Answer, TEMPLATE-FILES\REGEX\app-exercise5-answer.js
+   ; js-regex-1-answer
+   FileRead, jsRegexTemplate1Answer, TEMPLATE-FILES\REGEX\app-exercise1-answer.js
+   ; js-regex-2-answer
+   FileRead, jsRegexTemplate2Answer, TEMPLATE-FILES\REGEX\app-exercise2-answer.js
+   ; js-regex-3-answer
+   FileRead, jsRegexTemplate3Answer, TEMPLATE-FILES\REGEX\app-exercise3-answer.js
+   ; js-regex-4-answer
+   FileRead, jsRegexTemplate4Answer, TEMPLATE-FILES\REGEX\app-exercise4-answer.js
+   ; js-regex-5-answer
+   FileRead, jsRegexTemplate5Answer, TEMPLATE-FILES\REGEX\app-exercise5-answer.js
 
-; js-regex-capturing
-FileRead, jsRegexTemplateCapturing, TEMPLATE-FILES\REGEX\app-exerciseCapturingText.js
-; js-regex-Match
-FileRead, jsRegexTemplateMatch, TEMPLATE-FILES\REGEX\app-exerciseInfoAboutMatch.js
-; js-regex-Iterate
-FileRead, jsRegexTemplateIterate, TEMPLATE-FILES\REGEX\app-exerciseIterate.js
-; js-regex-Replace
-FileRead, jsRegexTemplateReplace, TEMPLATE-FILES\REGEX\app-exerciseReplace.js
+   ; js-regex-capturing
+   FileRead, jsRegexTemplateCapturing, TEMPLATE-FILES\REGEX\app-exerciseCapturingText.js
+   ; js-regex-Match
+   FileRead, jsRegexTemplateMatch, TEMPLATE-FILES\REGEX\app-exerciseInfoAboutMatch.js
+   ; js-regex-Iterate
+   FileRead, jsRegexTemplateIterate, TEMPLATE-FILES\REGEX\app-exerciseIterate.js
+   ; js-regex-Replace
+   FileRead, jsRegexTemplateReplace, TEMPLATE-FILES\REGEX\app-exerciseReplace.js
 
-; js-regex-Capturing-answer
-FileRead, jsRegexTemplateCapturingAnswer, TEMPLATE-FILES\REGEX\app-exerciseCapturingText-answer.js
-; js-regex-Match-answer
-FileRead, jsRegexTemplateMatchAnswer, TEMPLATE-FILES\REGEX\app-exerciseInfoAboutMatch-answer.js
-; js-regex-Iterate-answer
-FileRead, jsRegexTemplateIterateAnswer, TEMPLATE-FILES\REGEX\app-exerciseIterate-answer.js
-; js-regex-Replace-answer
-FileRead, jsRegexTemplateReplaceAnswer, TEMPLATE-FILES\REGEX\app-exerciseReplace-answer.js
-
+   ; js-regex-Capturing-answer
+   FileRead, jsRegexTemplateCapturingAnswer, TEMPLATE-FILES\REGEX\app-exerciseCapturingText-answer.js
+   ; js-regex-Match-answer
+   FileRead, jsRegexTemplateMatchAnswer, TEMPLATE-FILES\REGEX\app-exerciseInfoAboutMatch-answer.js
+   ; js-regex-Iterate-answer
+   FileRead, jsRegexTemplateIterateAnswer, TEMPLATE-FILES\REGEX\app-exerciseIterate-answer.js
+   ; js-regex-Replace-answer
+   FileRead, jsRegexTemplateReplaceAnswer, TEMPLATE-FILES\REGEX\app-exerciseReplace-answer.js
 
 }
 
@@ -162,6 +161,11 @@ FileRead, jsRegexTemplateReplaceAnswer, TEMPLATE-FILES\REGEX\app-exerciseReplace
    ; html-regex-intro-exercisepasswords.html
    FileRead, htmlRegexTemplatePass, TEMPLATE-FILES\REGEX\intro-exercisepasswords.html
 
+}
+
+{ ; template files AHK
+   ; ahk-1
+   FileRead, ahkTemplate1, TEMPLATE-FILES\AHK\template1.ahk
 }
 
 ; InputBox, domProjectName, Projeto JavaScript/HTML , Por favor`, insira o nome do Projeto,, 300,150, 800,500, locale, 15, DOM-
@@ -1057,7 +1061,7 @@ ExecuteAHK:
    Gui, Submit, NoHide
    
          folderProject := StrSplit(AHKProjectName, "-")[1] ; palavra antes do traço
-         folderdomProjectName := RegexReplace(StrSplit(domProjectName, "-",,2)[2], "-{1,}", "\") ; todo o resto da palavra após o 1º - 
+         folderAHKProjectName := RegexReplace(StrSplit(AHKProjectName, "-",,2)[2], "-{1,}", "\") ; todo o resto da palavra após o 1º - 
          ; caso vc insira nome sem - no input o slash igual a nada para não colocar / no script dentro dos template html..
          if(folderAHKProjectName == ""){
             slash := ""
@@ -1069,10 +1073,10 @@ ExecuteAHK:
       ; cria um arquivo .AHK com nome do input do usuario se o arquivo não existe ainda
    
    ; criar arquivo .AHK
-      if !FileExist(gitFolder1 "\" folderProject "\" folderAHKProjectName "\" AHKProjectName ".js")  
+      if !FileExist(gitFolder1 "\" folderProject "\" folderAHKProjectName "\" AHKProjectName ".ahk")  
          {
             Notify().AddWindow("Arquivo não existe, vamos criar!",{Time:2000,Icon:28,Background:"0x990000",Title:"OPS!",TitleSize:15, Size:15, Color: "0xCDA089", TitleColor: "0xE1B9A4"},,"setPosBR") ;
-                  FileAppend, %jsRegexTemplate1%, %gitFolder1%\%folderProject%%slash%%folderAHKProjectName%\%AHKProjectName%.js
+                  FileAppend, %ahkTemplate1%, %gitFolder1%\%folderProject%%slash%%folderAHKProjectName%\%AHKProjectName%.ahk
    
                   if !FileExist(gitFolder1 "\" folderProject "\" folderAHKProjectName "\index.html")
                      {
