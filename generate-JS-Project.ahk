@@ -3,6 +3,32 @@ SendMode Input
 SetWorkingDir, %A_ScriptDir%
 if not A_IsAdmin
    Run *RunAs "%A_ScriptFullPath%" ; (A_AhkPath is usually optional if the script has the .ahk extension.) You would typically check  first.p
+/* ESTILO E ICONE DO SCRIPT
+*/
+Menu, Tray, Icon, C:\Windows\system32\imageres.dll,312 ;Set custom Script icon
+
+DLLPath=C:\Users\%A_UserName%\Documents\Github\AHK\secondary-scripts\ahk-styles\styles\USkin.dll ;Location to the USkin.dll file
+StylesPath=C:\Users\%A_UserName%\Documents\Github\AHK\secondary-scripts\ahk-styles\styles ;location where you saved the .msstyles files
+
+; melhores dark: cosmo, lakrits
+; melhores light: MacLion3, Milikymac, Panther, Milk, Luminous, fanta, invoice
+SkinForm(DLLPath,Apply, StylesPath "\lakrits.msstyles") ; cosmo. msstyles
+
+
+	; Gosub, Gui
+; SkinForm(DLLPath,"0", StylesPath . CurrentStyle)	
+
+SkinForm(DLLPath,Param1 = "Apply", SkinName = ""){
+	if(Param1 = Apply){
+		DllCall("LoadLibrary", str, DLLPath)
+		DllCall(DLLPath . "\USkinInit", Int,0, Int,0, AStr, SkinName)
+	}else if(Param1 = 0){
+		DllCall(DLLPath . "\USkinExit")
+	}
+}
+
+/* SCRIPT COMEÇA AQUI
+*/
 
 { ; VARIABLE gitFolder1
    gitFolder1 := "Y:\Github"
@@ -170,6 +196,7 @@ if not A_IsAdmin
 
 ; InputBox, domProjectName, Projeto JavaScript/HTML , Por favor`, insira o nome do Projeto,, 300,150, 800,500, locale, 15, DOM-
 Gui, Destroy
+Gui, Font, cblue
 Gui Add, Tab3,, JS|DOM||RegExp|AHK|Clean|Bootstrap|GA4 e GTM|Projetos Oficiais
 
 Gui, Tab, DOM
@@ -496,7 +523,7 @@ Gui, Tab, Projetos Oficiais
    gui, Add, Button, xs+1 w90 gExecuteProjetoOficial Default, &Abrir Projeto
    gui, Add, Button, x+5 w75 gOpenProjetoOficialFolder, &Abrir Pasta
    gui, Add, Button, w75 x+5 gCancel Cancel, &Cancelar
-gui, Show,, Projeto Web
+gui, Show,, Projeto Web - Felipe Lulio
 WinSet, AlwaysOnTop, On, Projeto Web ahk_class AutoHotkeyGUI
 Return
 
