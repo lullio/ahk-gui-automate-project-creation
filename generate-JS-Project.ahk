@@ -1129,17 +1129,17 @@ ExecuteAHK:
           Reload
    }Else{ ; se nao for o www. no dropdown
       ; abrir vs code com a pasta do dropdown
-      RunWait, %ComSpec% /c code -n "%gitFolder1%\JS\%foldersJS%", , Hide
+      RunWait, %ComSpec% /c code -n "%gitFolder1%\AHK\%foldersAHK%", , Hide
        ; abrir index.html
-       Run, "chrome.exe" "%gitFolder1%\JS\%foldersJS%\index.html"
+       Run, "chrome.exe" "%gitFolder1%\AHK\%foldersAHK%\index.html"
    
-       if FileExist(gitFolder1 "\" folderProject "\" foldersJS "\index2-doIt.html")  
-               Run, "chrome.exe" "%gitFolder1%\JS\%foldersJS%\index2-doIt.html"
+       if FileExist(gitFolder1 "\" folderProject "\" foldersAHK "\index2-doIt.html")  
+               Run, "chrome.exe" "%gitFolder1%\AHK\%foldersAHK%\index2-doIt.html"
    
-       if FileExist(gitFolder1 "\" folderProject "\" foldersJS "\nodes.html")  
-         Run, "chrome.exe" "%gitFolder1%\JS\%foldersJS%\nodes.html"
-       if FileExist(gitFolder1 "\" folderProject "\" foldersJS "\traversing-JS.html")  
-         Run, "chrome.exe" "%gitFolder1%\JS\%foldersJS%\traversing-JS.html"
+       if FileExist(gitFolder1 "\" folderProject "\" foldersAHK "\nodes.html")  
+         Run, "chrome.exe" "%gitFolder1%\AHK\%foldersAHK%\nodes.html"
+       if FileExist(gitFolder1 "\" folderProject "\" foldersAHK "\traversing-AHK.html")  
+         Run, "chrome.exe" "%gitFolder1%\AHK\%foldersAHK%\traversing-AHK.html"
    }
 Return
 
