@@ -730,7 +730,7 @@ ExecuteDOM:
        if FileExist(gitFolder1 "\" folderProject "\" foldersDOM "\traversing-DOM.html")  
          Run, "chrome.exe" "%gitFolder1%\DOM\%foldersDOM%\traversing-DOM.html"
    }
-
+Return
    
 /*
 SCRIPTS RegExp
