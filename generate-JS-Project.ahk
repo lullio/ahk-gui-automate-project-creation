@@ -1,6 +1,4 @@
-﻿#SingleInstance, Force
-SendMode Input
-SetWorkingDir, %A_ScriptDir%
+﻿#Include, <Default_Settings>
 if not A_IsAdmin
    Run *RunAs "%A_ScriptFullPath%" ; (A_AhkPath is usually optional if the script has the .ahk extension.) You would typically check  first.p
 /* ESTILO E ICONE DO SCRIPT
@@ -29,8 +27,9 @@ SkinForm(DLLPath,Param1 = "Apply", SkinName = ""){
 
 /* SCRIPT COMEÇA AQUI
 */
+global gitFolder1
 
-{ ; VARIABLE gitFolder1
+ ; VARIABLE gitFolder1
    gitFolder1 := "Y:\Github"
    IfNotExist, %gitFolder1%
    {
@@ -60,9 +59,9 @@ SkinForm(DLLPath,Param1 = "Apply", SkinName = ""){
    {
       gitFolder1 = \\wsl.localhost\Ubuntu\home\ubuntu\git
    }
-}
 
-{ ; VARIABLE vscodeFolder
+
+ ; VARIABLE vscodeFolder
    
    vscodeFolder := "C:\Users\Felipe\AppData\Local\Programs\Microsoft VS Code\Code.exe"
    IfNotExist, %vscodeFolder%
@@ -73,15 +72,14 @@ SkinForm(DLLPath,Param1 = "Apply", SkinName = ""){
       vscodeFolder = "C:\Users\Estudos\AppData\Local\Programs\Microsoft VS Code\Code.exe"
    IfNotExist, %vscodeFolder%
       vscodeFolder = "C:\Program Files\Microsoft VS Code"
-}
 
-{ ; Other Variables and Scape Variables
+
+ ; Other Variables and Scape Variables
    escapePercent := "%"
    slash := "\"
    escapeDropdownItem := "www.|"
-}
 
-{ ; TEMPLATES FILES JAVASCRIPT DOM E JS
+ ; TEMPLATES FILES JAVASCRIPT DOM E JS
    ; js-dom-1
    FileRead, jsDomTemplate1, TEMPLATE-FILES\DOM\js-dom-1.js   
    ; js-dom-2
@@ -98,8 +96,8 @@ SkinForm(DLLPath,Param1 = "Apply", SkinName = ""){
    FileRead, jsExpressjsCompleteScriptjsTemplate1, TEMPLATE-FILES\JS\js-expressjs-complete-script.js-1.js   
    ; js-expressjs-1
    FileRead, jsExpressjsTemplate1, TEMPLATE-FILES\JS\js-expressjs-1.js   
-}
-{ ; TEMPLATE FILES JAVASCRIPT REGEX
+
+; TEMPLATE FILES JAVASCRIPT REGEX
    ; js-regex-1
    FileRead, jsRegexTemplate1, TEMPLATE-FILES\REGEX\app-exercise1.js   
    ; js-regex-2
@@ -140,9 +138,9 @@ SkinForm(DLLPath,Param1 = "Apply", SkinName = ""){
    ; js-regex-Replace-answer
    FileRead, jsRegexTemplateReplaceAnswer, TEMPLATE-FILES\REGEX\app-exerciseReplace-answer.js
 
-}
 
-{ ; TEMPLATE FILES HTML DOM E CLEAN
+
+; TEMPLATE FILES HTML DOM E CLEAN
    ; html-dom-1
    FileRead, htmlDomTemplate1, TEMPLATE-FILES\DOM\html-dom-1.html   
    ; html-dom-2
@@ -163,9 +161,9 @@ SkinForm(DLLPath,Param1 = "Apply", SkinName = ""){
    FileRead, htmlDomCloningTemplate1, TEMPLATE-FILES\DOM\html-dom-cloning-1.html
 
  
-}
 
-{ ; TEMPLATE FILES HTML REGEX
+
+ ; TEMPLATE FILES HTML REGEX
    ; html-regex-1
    FileRead, htmlRegexTemplate1, TEMPLATE-FILES\REGEX\index-exercise1.html
    ; html-regex-2
@@ -187,17 +185,17 @@ SkinForm(DLLPath,Param1 = "Apply", SkinName = ""){
    ; html-regex-intro-exercisepasswords.html
    FileRead, htmlRegexTemplatePass, TEMPLATE-FILES\REGEX\intro-exercisepasswords.html
 
-}
 
-{ ; template files AHK
+
+ ; template files AHK
    ; ahk-1
    FileRead, ahkTemplate1, TEMPLATE-FILES\AHK\template1.ahk
-}
+
 
 ; InputBox, domProjectName, Projeto JavaScript/HTML , Por favor`, insira o nome do Projeto,, 300,150, 800,500, locale, 15, DOM-
 Gui, Destroy
 Gui, Font, cblue
-Gui Add, Tab3,, JS|DOM||RegExp|AHK|Clean|Bootstrap|GA4 e GTM|Projetos Oficiais
+Gui Add, Tab3,vTabVar, JS|DOM||RegExp|AHK|Clean|Bootstrap|GA4 e GTM|Projetos Oficiais
 
 Gui, Tab, DOM
    gui, Add, Edit, w390 vdomProjectName , DOM-
@@ -555,7 +553,6 @@ Return
 - SE QUISER REMOVER O AUTOCOMPLETE DO DROPDOWN BASTA REMOVER O hwndSitesDOMID
 */
 SitesDOM:
-{
          ControlGetText, Eingabe,, ahk_id %SitesDOMID%
          ControlGet, Liste, List, , , ahk_id %SitesDOMID%
          ; msgbox %Liste%
@@ -602,134 +599,346 @@ SitesDOM:
    
       }
 
-         return
+Return
+Execute(inputProjectName, getAllFoldersProject){
+      Gui, Submit, NoHide
+      global tabvar
+      ; msgbox %tabvar%
+      ; TRUQUE PARA CAPTURAR VARIAVEL GLOBAL
+      global gitFolder1
+      global vscodeFolder
+      global escapeDropdownItem
+      global slash
+      global jsDomTemplate1
+      global jsDomTemplate2
+      global jsRegexTemplate1
+      global jsCleanTemplate11
+      global jsNodejsTemplate1
+      global jsNodejsTemplate1
+      global jsExpressjsCompleteServerjsTemplate1
+      global jsExpressjsCompleteScriptjsTemplate1
+      global jsExpressjsTemplate1
+      global jsRegexTemplate1
+      global jsRegexTemplate2
+      global jsRegexTemplate3
+      global jsRegexTemplate4
+      global jsRegexTemplate5
+      global jsRegexTemplate1Answer
+      global jsRegexTemplate2Answer
+      global jsRegexTemplate3Answer
+      global jsRegexTemplate4Answer
+      global jsRegexTemplate5Answer
+      global jsRegexTemplateCapturing
+      global jsRegexTemplateMatch
+      global jsRegexTemplateIterate
+      global jsRegexTemplateReplace
+      global jsRegexTemplateCapturingAnswer
+      global jsRegexTemplateMatchAnswer
+      global jsRegexTemplateIterateAnswer
+      global jsRegexTemplateReplaceAnswer
+      
+      global htmlRegexTemplate1
+      global htmlRegexTemplate2
+      global htmlRegexTemplate3
+      global htmlRegexTemplate4
+      global htmlRegexTemplate5
+
+      global htmlDomTemplate1
+      global htmlDomTemplate2
+      global htmlDomTemplate3
+      global htmlDomTemplate2Answer
+      global htmlDomTemplate3Answer
+      global htmlCleanTemplate1
+      global htmlDomCloningTemplate1
+      global htmlDomTraversingTemplate1
+      global htmlDomNodeTemplate1
+
+      global ahkTemplate1
+      
+
+         folderProject := StrSplit(inputProjectName, "-")[1] ; palavra antes do traço
+         folderProjectName := RegexReplace(StrSplit(inputProjectName, "-",,2)[2], "-{1,}", "\") ; todo o resto da palavra após o 1º - 
+         folderProjectName.OLD := StrSplit(inputProjectName, "-")[2] ; palavra depois do traço
+         if(folderProjectName == ""){
+            slash := ""
+         }
+   ; se for o www. selecionado no dropdown
+   if(RegExMatch(getAllFoldersProject, "i)" escapeDropdownItem "\?")){ ; o escapeDropdownItem fica com o | no final 
+         FileCreateDir, %gitFolder1%\%folderProject%\%folderProjectName%\
+      ; cria um arquivo .js com nome do input do usuario se o arquivo não existe ainda
+   
+   ; criar arquivo .js
+      if !FileExist(gitFolder1 "\" folderProject "\" folderProjectName "\" inputProjectName ".js")  
+         {
+            Notify().AddWindow("Arquivo não existe, vamos criar!",{Time:2000,Icon:28,Background:"0x990000",Title:"OPS!",TitleSize:15, Size:15, Color: "0xCDA089", TitleColor: "0xE1B9A4"},,"setPosBR") ;
+
+            /*
+               VALIDAÇÃO DE QUAL LINGAUGEM DE PROGRAMAÇÃO / QUAL TAB / PARA ABRIR OS ARQUIVOS TEMPLATES
+            */
+            if(tabvar == "DOM"){
+               /* DOM EXERCISE 1
+            */
+            if(RegExMatch(inputProjectName, "im)(^DOM-Exercise-?1)|(^DOM-Exercicio-?1)|(^DOM-Ex-?1)") != 0)
+               {
+                  ; ARQUIVO JS - EXERCÍCIO DOM 1
+               if !FileExist(gitFolder1 "\" folderProject "\" folderProjectName "\script.js")
+                     {               
+                        FileAppend, %jsDomTemplate1%, %gitFolder1%\%folderProject%%slash%%folderProjectName%\script.js
+                     }
+                  ; ARQUIVO HTML - EXERCÍCIO DOM 1
+               if !FileExist(gitFolder1 "\" folderProject "\" folderProjectName "\" inputProjectName ".html")
+                     {
+                        FileAppend, %htmlDomTemplate1%, %gitFolder1%\%folderProject%%slash%%folderProjectName%\%inputProjectName%.html
+                     }
+                  ; ARQUIVO TXT - EXERCÍCIO DOM 1 - Info do Exercício
+               if !FileExist(gitFolder1 "\" folderProject "\" folderProjectName "\info.txt")
+                     {
+                        FileAppend, "Exercicio para selecionar os elementos e trocar a cor deles.", %gitFolder1%\%folderProject%%slash%%folderProjectName%\info.txt
+                     }
+         /* DOM EXERCISE 2
+         */
+               }else if(RegExMatch(inputProjectName, "im)(^DOM-Exercise-?2)|(^DOM-Exercicio-?2)|(^DOM-Ex-?2)") != 0){
+                  ; ARQUIVO JS - EXERCÍCIO DOM 2
+                  if !FileExist(gitFolder1 "\" folderProject "\" folderProjectName "\script.js")
+                     {               
+                        FileAppend, %jsDomTemplate2%, %gitFolder1%\%folderProject%%slash%%folderProjectName%\script.js
+                     }
+                  ; ARQUIVO HTML - EXERCÍCIO DOM 2
+               if !FileExist(gitFolder1 "\" folderProject "\" folderProjectName "\" inputProjectName ".html")
+                     {
+                        FileAppend, %htmlDomTemplate2%, %gitFolder1%\%folderProject%%slash%%folderProjectName%\%inputProjectName%.html
+                        FileAppend, %htmlDomTemplate2Answer%, %gitFolder1%\%folderProject%%slash%%folderProjectName%\%inputProjectName%-answer.html
+                     }
+                  ; ARQUIVO TXT - EXERCÍCIO DOM 2 - Info do Exercício
+               if !FileExist(gitFolder1 "\" folderProject "\" folderProjectName "\info.txt")
+                     {
+                        FileAppend, "Exercicio para trocar a cor dos botões.", %gitFolder1%\%folderProject%%slash%%folderProjectName%\info.txt
+                     }                  
+               }else if(RegExMatch(inputProjectName, "im)(^DOM-Exercise-?3)|(^DOM-Exercicio-?3)|(^DOM-Ex-?3)") != 0){
+                  ; ARQUIVO JS - EXERCÍCIO DOM 3
+                  if !FileExist(gitFolder1 "\" folderProject "\" folderProjectName "\script.js")
+                     {               
+                        FileAppend, %jsDomTemplate3%, %gitFolder1%\%folderProject%%slash%%folderProjectName%\script.js
+                     }
+                  ; ARQUIVO HTML - EXERCÍCIO DOM 3
+               if !FileExist(gitFolder1 "\" folderProject "\" folderProjectName "\" inputProjectName ".html")
+                     {
+                        FileAppend, %htmlDomTemplate3%, %gitFolder1%\%folderProject%%slash%%folderProjectName%\%inputProjectName%.html
+                        FileAppend, %htmlDomTemplate3Answer%, %gitFolder1%\%folderProject%%slash%%folderProjectName%\%inputProjectName%-answer.html
+                     }
+               ; ARQUIVO TXT - EXERCÍCIO DOM 3 - Info do Exercício
+               if !FileExist(gitFolder1 "\" folderProject "\" folderProjectName "\info.txt")
+                  {
+                     FileAppend, "Add each animal name from the animals array as a list item under the ul tag", %gitFolder1%\%folderProject%%slash%%folderProjectName%\info.txt
+                  }                                                     
+               }Else{
+                  FileAppend, %jsDomTemplate1%, %gitFolder1%\%folderProject%%slash%%folderProjectName%\%inputProjectName%.js
+      
+                  if !FileExist(gitFolder1 "\" folderProject "\" folderProjectName "\index.html")
+                     {
+                        FileAppend, %htmlDomTemplate1%, %gitFolder1%\%folderProject%%slash%%folderProjectName%\index.html
+                        FileAppend, %htmlDomTemplate2%, %gitFolder1%\%folderProject%%slash%%folderProjectName%\index2-doIt.html
+                        FileAppend, %htmlDomTemplate2Answer%, %gitFolder1%\%folderProject%%slash%%folderProjectName%\index2-answer.html
+                        FileAppend, %htmlDomNodeTemplate1%, %gitFolder1%\%folderProject%%slash%%folderProjectName%\nodes.html
+                        FileAppend, %htmlDomTraversingTemplate1%, %gitFolder1%\%folderProject%%slash%%folderProjectName%\traversing-DOM.html
+                        FileAppend, %htmlDomCloningTemplate1%, %gitFolder1%\%folderProject%%slash%%folderProjectName%\cloning-DOM.html
+                     }
+               }
+               Sleep, 700
+               ; abrir vs code com a pasta criada
+               RunWait, %ComSpec% /c code -n "%gitFolder1%\%folderProject%%slash%%folderProjectName%", , Hide
+         
+               Sleep, 1000
+               ; abrir index.html
+               Run, "chrome.exe" "%gitFolder1%\%folderProject%%slash%%folderProjectName%\%inputProjectName%.html"
+         
+               if FileExist(gitFolder1 "\" folderProject "\" folderProjectName "\index2-doIt.html")  
+                        Run, "chrome.exe" "%gitFolder1%\%folderProject%%slash%%folderProjectName%\index2-doIt.html"
+         
+               if FileExist(gitFolder1 "\" folderProject "\" folderProjectName "\nodes.html")  
+                  Run, "chrome.exe" "%gitFolder1%\%folderProject%%slash%%folderProjectName%\nodes.html"
+               if FileExist(gitFolder1 "\" folderProject "\" folderProjectName "\traversing-DOM.html")  
+                  Run, "chrome.exe" "%gitFolder1%\%folderProject%%slash%%folderProjectName%\traversing-DOM.html"
+               Reload
+         
+            }else if(tabvar == "JS"){
+            
+            }else if(tabvar == "RegExp"){
+            
+            }else if(tabvar == "AHK"){
+            
+            }else if(tabvar == "DOM"){
+            
+            }else if(tabvar == "DOM"){
+            
+            }else if(tabvar == "DOM"){
+            
+            }else if(tabvar == "DOM"){
+            
+            }
+           
+         }
+         
+   }Else{ ; se nao for o www. no dropdown
+   if(tabvar == "DOM"){
+      ; abrir vs code com a pasta do dropdown
+      Sleep, 300
+      RunWait, %ComSpec% /c code -n "%gitFolder1%\DOM\%getAllFoldersProject%", , Hide
+       ; abrir index.html
+       Run, "chrome.exe" "%gitFolder1%\DOM\%getAllFoldersProject%\index.html"
+   
+       if FileExist(gitFolder1 "\" folderProject "\" getAllFoldersProject "\index2-doIt.html")  
+               Run, "chrome.exe" "%gitFolder1%\DOM\%getAllFoldersProject%\index2-doIt.html"
+   
+       if FileExist(gitFolder1 "\" folderProject "\" getAllFoldersProject "\nodes.html")  
+         Run, "chrome.exe" "%gitFolder1%\DOM\%getAllFoldersProject%\nodes.html"
+       if FileExist(gitFolder1 "\" folderProject "\" getAllFoldersProject "\traversing-DOM.html")  
+         Run, "chrome.exe" "%gitFolder1%\DOM\%getAllFoldersProject%\traversing-DOM.html"
+   }else if(tabvar == "JS"){
+            
+   }else if(tabvar == "RegExp"){
+   
+   }else if(tabvar == "AHK"){
+   
+   }else if(tabvar == "DOM"){
+   
+   }else if(tabvar == "DOM"){
+   
+   }else if(tabvar == "DOM"){
+   
+   }else if(tabvar == "DOM"){
+   
+   }
+ }
 }
 ExecuteDOM:
    Gui, Submit, NoHide
    
-         folderProject := StrSplit(domProjectName, "-")[1] ; palavra antes do traço
-         folderdomProjectName := RegexReplace(StrSplit(domProjectName, "-",,2)[2], "-{1,}", "\") ; todo o resto da palavra após o 1º - 
-         folderdomProjectName.OLD := StrSplit(domProjectName, "-")[2] ; palavra depois do traço
-         ; msgbox %folderProject%
-         ; msgbox %folderdomProjectName%
-         ; msgbox %folderdomProjectName2%
-         ; caso vc insira nome sem - no input o slash igual a nada para não colocar / no script dentro dos template html..
-         if(folderdomProjectName == ""){
-            slash := ""
-         }
-   ; se for o www. selecionado no dropdown
-   if(RegExMatch(foldersDOM, "i)" escapeDropdownItem "\?")){ ; o escapeDropdownItem fica com o | no final 
+   Execute(domProjectName, foldersDOM)
    
-         FileCreateDir, %gitFolder1%\%folderProject%\%folderdomProjectName%\
-      ; cria um arquivo .js com nome do input do usuario se o arquivo não existe ainda
+   ;       folderProject := StrSplit(domProjectName, "-")[1] ; palavra antes do traço
+   ;       folderdomProjectName := RegexReplace(StrSplit(domProjectName, "-",,2)[2], "-{1,}", "\") ; todo o resto da palavra após o 1º - 
+   ;       folderdomProjectName.OLD := StrSplit(domProjectName, "-")[2] ; palavra depois do traço
+   ;       ; msgbox %folderProject%
+   ;       ; msgbox %folderdomProjectName%
+   ;       ; msgbox %folderdomProjectName2%
+   ;       ; caso vc insira nome sem - no input o slash igual a nada para não colocar / no script dentro dos template html..
+   ;       if(folderdomProjectName == ""){
+   ;          slash := ""
+   ;       }
+   ; ; se for o www. selecionado no dropdown
+   ; if(RegExMatch(foldersDOM, "i)" escapeDropdownItem "\?")){ ; o escapeDropdownItem fica com o | no final 
    
-   ; criar arquivo .js
-      if !FileExist(gitFolder1 "\" folderProject "\" folderdomProjectName "\" domProjectName ".js")  
-         {
-            Notify().AddWindow("Arquivo não existe, vamos criar!",{Time:2000,Icon:28,Background:"0x990000",Title:"OPS!",TitleSize:15, Size:15, Color: "0xCDA089", TitleColor: "0xE1B9A4"},,"setPosBR") ;
+   ;       FileCreateDir, %gitFolder1%\%folderProject%\%folderdomProjectName%\
+   ;    ; cria um arquivo .js com nome do input do usuario se o arquivo não existe ainda
    
-         /* DOM EXERCISE 1
-         */
-            if(RegExMatch(domProjectName, "im)(^DOM-Exercise-?1)|(^DOM-Exercicio-?1)|(^DOM-Ex-?1)") != 0)
-               {
-                  ; ARQUIVO JS - EXERCÍCIO DOM 1
-               if !FileExist(gitFolder1 "\" folderProject "\" folderdomProjectName "\script.js")
-                     {               
-                        FileAppend, %jsDomTemplate1%, %gitFolder1%\%folderProject%%slash%%folderdomProjectName%\script.js
-                     }
-                  ; ARQUIVO HTML - EXERCÍCIO DOM 1
-               if !FileExist(gitFolder1 "\" folderProject "\" folderdomProjectName "\" domProjectName ".html")
-                     {
-                        FileAppend, %htmlDomTemplate1%, %gitFolder1%\%folderProject%%slash%%folderdomProjectName%\%domProjectName%.html
-                     }
-                  ; ARQUIVO TXT - EXERCÍCIO DOM 1 - Info do Exercício
-               if !FileExist(gitFolder1 "\" folderProject "\" folderdomProjectName "\info.txt")
-                     {
-                        FileAppend, "Exercicio para selecionar os elementos e trocar a cor deles.", %gitFolder1%\%folderProject%%slash%%folderdomProjectName%\info.txt
-                     }
-         /* DOM EXERCISE 2
-         */
-               }else if(RegExMatch(domProjectName, "im)(^DOM-Exercise-?2)|(^DOM-Exercicio-?2)|(^DOM-Ex-?2)") != 0){
-                  ; ARQUIVO JS - EXERCÍCIO DOM 2
-                  if !FileExist(gitFolder1 "\" folderProject "\" folderdomProjectName "\script.js")
-                     {               
-                        FileAppend, %jsDomTemplate2%, %gitFolder1%\%folderProject%%slash%%folderdomProjectName%\script.js
-                     }
-                  ; ARQUIVO HTML - EXERCÍCIO DOM 2
-               if !FileExist(gitFolder1 "\" folderProject "\" folderdomProjectName "\" domProjectName ".html")
-                     {
-                        FileAppend, %htmlDomTemplate2%, %gitFolder1%\%folderProject%%slash%%folderdomProjectName%\%domProjectName%.html
-                        FileAppend, %htmlDomTemplate2Answer%, %gitFolder1%\%folderProject%%slash%%folderdomProjectName%\%domProjectName%-answer.html
-                     }
-                  ; ARQUIVO TXT - EXERCÍCIO DOM 2 - Info do Exercício
-               if !FileExist(gitFolder1 "\" folderProject "\" folderdomProjectName "\info.txt")
-                     {
-                        FileAppend, "Exercicio para trocar a cor dos botões.", %gitFolder1%\%folderProject%%slash%%folderdomProjectName%\info.txt
-                     }                  
-               }else if(RegExMatch(domProjectName, "im)(^DOM-Exercise-?3)|(^DOM-Exercicio-?3)|(^DOM-Ex-?3)") != 0){
-                  ; ARQUIVO JS - EXERCÍCIO DOM 3
-                  if !FileExist(gitFolder1 "\" folderProject "\" folderdomProjectName "\script.js")
-                     {               
-                        FileAppend, %jsDomTemplate3%, %gitFolder1%\%folderProject%%slash%%folderdomProjectName%\script.js
-                     }
-                  ; ARQUIVO HTML - EXERCÍCIO DOM 3
-               if !FileExist(gitFolder1 "\" folderProject "\" folderdomProjectName "\" domProjectName ".html")
-                     {
-                        FileAppend, %htmlDomTemplate3%, %gitFolder1%\%folderProject%%slash%%folderdomProjectName%\%domProjectName%.html
-                        FileAppend, %htmlDomTemplate3Answer%, %gitFolder1%\%folderProject%%slash%%folderdomProjectName%\%domProjectName%-answer.html
-                     }
-               ; ARQUIVO TXT - EXERCÍCIO DOM 3 - Info do Exercício
-               if !FileExist(gitFolder1 "\" folderProject "\" folderdomProjectName "\info.txt")
-                  {
-                     FileAppend, "Add each animal name from the animals array as a list item under the ul tag", %gitFolder1%\%folderProject%%slash%%folderdomProjectName%\info.txt
-                  }                                                     
-               }Else{
-                  FileAppend, %jsDomTemplate1%, %gitFolder1%\%folderProject%%slash%%folderdomProjectName%\%domProjectName%.js
+   ; ; criar arquivo .js
+   ;    if !FileExist(gitFolder1 "\" folderProject "\" folderdomProjectName "\" domProjectName ".js")  
+   ;       {
+   ;          Notify().AddWindow("Arquivo não existe, vamos criar!",{Time:2000,Icon:28,Background:"0x990000",Title:"OPS!",TitleSize:15, Size:15, Color: "0xCDA089", TitleColor: "0xE1B9A4"},,"setPosBR") ;
+   
+   ;       /* DOM EXERCISE 1
+   ;       */
+   ;          if(RegExMatch(domProjectName, "im)(^DOM-Exercise-?1)|(^DOM-Exercicio-?1)|(^DOM-Ex-?1)") != 0)
+   ;             {
+   ;                ; ARQUIVO JS - EXERCÍCIO DOM 1
+   ;             if !FileExist(gitFolder1 "\" folderProject "\" folderdomProjectName "\script.js")
+   ;                   {               
+   ;                      FileAppend, %jsDomTemplate1%, %gitFolder1%\%folderProject%%slash%%folderdomProjectName%\script.js
+   ;                   }
+   ;                ; ARQUIVO HTML - EXERCÍCIO DOM 1
+   ;             if !FileExist(gitFolder1 "\" folderProject "\" folderdomProjectName "\" domProjectName ".html")
+   ;                   {
+   ;                      FileAppend, %htmlDomTemplate1%, %gitFolder1%\%folderProject%%slash%%folderdomProjectName%\%domProjectName%.html
+   ;                   }
+   ;                ; ARQUIVO TXT - EXERCÍCIO DOM 1 - Info do Exercício
+   ;             if !FileExist(gitFolder1 "\" folderProject "\" folderdomProjectName "\info.txt")
+   ;                   {
+   ;                      FileAppend, "Exercicio para selecionar os elementos e trocar a cor deles.", %gitFolder1%\%folderProject%%slash%%folderdomProjectName%\info.txt
+   ;                   }
+   ;       /* DOM EXERCISE 2
+   ;       */
+   ;             }else if(RegExMatch(domProjectName, "im)(^DOM-Exercise-?2)|(^DOM-Exercicio-?2)|(^DOM-Ex-?2)") != 0){
+   ;                ; ARQUIVO JS - EXERCÍCIO DOM 2
+   ;                if !FileExist(gitFolder1 "\" folderProject "\" folderdomProjectName "\script.js")
+   ;                   {               
+   ;                      FileAppend, %jsDomTemplate2%, %gitFolder1%\%folderProject%%slash%%folderdomProjectName%\script.js
+   ;                   }
+   ;                ; ARQUIVO HTML - EXERCÍCIO DOM 2
+   ;             if !FileExist(gitFolder1 "\" folderProject "\" folderdomProjectName "\" domProjectName ".html")
+   ;                   {
+   ;                      FileAppend, %htmlDomTemplate2%, %gitFolder1%\%folderProject%%slash%%folderdomProjectName%\%domProjectName%.html
+   ;                      FileAppend, %htmlDomTemplate2Answer%, %gitFolder1%\%folderProject%%slash%%folderdomProjectName%\%domProjectName%-answer.html
+   ;                   }
+   ;                ; ARQUIVO TXT - EXERCÍCIO DOM 2 - Info do Exercício
+   ;             if !FileExist(gitFolder1 "\" folderProject "\" folderdomProjectName "\info.txt")
+   ;                   {
+   ;                      FileAppend, "Exercicio para trocar a cor dos botões.", %gitFolder1%\%folderProject%%slash%%folderdomProjectName%\info.txt
+   ;                   }                  
+   ;             }else if(RegExMatch(domProjectName, "im)(^DOM-Exercise-?3)|(^DOM-Exercicio-?3)|(^DOM-Ex-?3)") != 0){
+   ;                ; ARQUIVO JS - EXERCÍCIO DOM 3
+   ;                if !FileExist(gitFolder1 "\" folderProject "\" folderdomProjectName "\script.js")
+   ;                   {               
+   ;                      FileAppend, %jsDomTemplate3%, %gitFolder1%\%folderProject%%slash%%folderdomProjectName%\script.js
+   ;                   }
+   ;                ; ARQUIVO HTML - EXERCÍCIO DOM 3
+   ;             if !FileExist(gitFolder1 "\" folderProject "\" folderdomProjectName "\" domProjectName ".html")
+   ;                   {
+   ;                      FileAppend, %htmlDomTemplate3%, %gitFolder1%\%folderProject%%slash%%folderdomProjectName%\%domProjectName%.html
+   ;                      FileAppend, %htmlDomTemplate3Answer%, %gitFolder1%\%folderProject%%slash%%folderdomProjectName%\%domProjectName%-answer.html
+   ;                   }
+   ;             ; ARQUIVO TXT - EXERCÍCIO DOM 3 - Info do Exercício
+   ;             if !FileExist(gitFolder1 "\" folderProject "\" folderdomProjectName "\info.txt")
+   ;                {
+   ;                   FileAppend, "Add each animal name from the animals array as a list item under the ul tag", %gitFolder1%\%folderProject%%slash%%folderdomProjectName%\info.txt
+   ;                }                                                     
+   ;             }Else{
+   ;                FileAppend, %jsDomTemplate1%, %gitFolder1%\%folderProject%%slash%%folderdomProjectName%\%domProjectName%.js
       
-                  if !FileExist(gitFolder1 "\" folderProject "\" folderdomProjectName "\index.html")
-                     {
-                        FileAppend, %htmlDomTemplate1%, %gitFolder1%\%folderProject%%slash%%folderdomProjectName%\index.html
-                        FileAppend, %htmlDomTemplate2%, %gitFolder1%\%folderProject%%slash%%folderdomProjectName%\index2-doIt.html
-                        FileAppend, %htmlDomTemplate2Answer%, %gitFolder1%\%folderProject%%slash%%folderdomProjectName%\index2-answer.html
-                        FileAppend, %htmlDomNodeTemplate1%, %gitFolder1%\%folderProject%%slash%%folderdomProjectName%\nodes.html
-                        FileAppend, %htmlDomTraversingTemplate1%, %gitFolder1%\%folderProject%%slash%%folderdomProjectName%\traversing-DOM.html
-                        FileAppend, %htmlDomCloningTemplate1%, %gitFolder1%\%folderProject%%slash%%folderdomProjectName%\cloning-DOM.html
-                     }
-               }
+   ;                if !FileExist(gitFolder1 "\" folderProject "\" folderdomProjectName "\index.html")
+   ;                   {
+   ;                      FileAppend, %htmlDomTemplate1%, %gitFolder1%\%folderProject%%slash%%folderdomProjectName%\index.html
+   ;                      FileAppend, %htmlDomTemplate2%, %gitFolder1%\%folderProject%%slash%%folderdomProjectName%\index2-doIt.html
+   ;                      FileAppend, %htmlDomTemplate2Answer%, %gitFolder1%\%folderProject%%slash%%folderdomProjectName%\index2-answer.html
+   ;                      FileAppend, %htmlDomNodeTemplate1%, %gitFolder1%\%folderProject%%slash%%folderdomProjectName%\nodes.html
+   ;                      FileAppend, %htmlDomTraversingTemplate1%, %gitFolder1%\%folderProject%%slash%%folderdomProjectName%\traversing-DOM.html
+   ;                      FileAppend, %htmlDomCloningTemplate1%, %gitFolder1%\%folderProject%%slash%%folderdomProjectName%\cloning-DOM.html
+   ;                   }
+   ;             }
            
-         }
+   ;       }
    
-         Sleep, 700
-         ; abrir vs code com a pasta criada
-         RunWait, %ComSpec% /c code -n "%gitFolder1%\%folderProject%%slash%%folderdomProjectName%", , Hide
+   ;       Sleep, 700
+   ;       ; abrir vs code com a pasta criada
+   ;       RunWait, %ComSpec% /c code -n "%gitFolder1%\%folderProject%%slash%%folderdomProjectName%", , Hide
    
-         Sleep, 1000
-         ; abrir index.html
-         Run, "chrome.exe" "%gitFolder1%\%folderProject%%slash%%folderdomProjectName%\%domProjectName%.html"
+   ;       Sleep, 1000
+   ;       ; abrir index.html
+   ;       Run, "chrome.exe" "%gitFolder1%\%folderProject%%slash%%folderdomProjectName%\%domProjectName%.html"
    
-          if FileExist(gitFolder1 "\" folderProject "\" folderdomProjectName "\index2-doIt.html")  
-                  Run, "chrome.exe" "%gitFolder1%\%folderProject%%slash%%folderdomProjectName%\index2-doIt.html"
+   ;        if FileExist(gitFolder1 "\" folderProject "\" folderdomProjectName "\index2-doIt.html")  
+   ;                Run, "chrome.exe" "%gitFolder1%\%folderProject%%slash%%folderdomProjectName%\index2-doIt.html"
    
-          if FileExist(gitFolder1 "\" folderProject "\" folderdomProjectName "\nodes.html")  
-            Run, "chrome.exe" "%gitFolder1%\%folderProject%%slash%%folderdomProjectName%\nodes.html"
-          if FileExist(gitFolder1 "\" folderProject "\" folderdomProjectName "\traversing-DOM.html")  
-            Run, "chrome.exe" "%gitFolder1%\%folderProject%%slash%%folderdomProjectName%\traversing-DOM.html"
-          Reload
-   }Else{ ; se nao for o www. no dropdown
-      ; abrir vs code com a pasta do dropdown
-      Sleep, 300
-      RunWait, %ComSpec% /c code -n "%gitFolder1%\DOM\%foldersDOM%", , Hide
-       ; abrir index.html
-       Run, "chrome.exe" "%gitFolder1%\DOM\%foldersDOM%\index.html"
+   ;        if FileExist(gitFolder1 "\" folderProject "\" folderdomProjectName "\nodes.html")  
+   ;          Run, "chrome.exe" "%gitFolder1%\%folderProject%%slash%%folderdomProjectName%\nodes.html"
+   ;        if FileExist(gitFolder1 "\" folderProject "\" folderdomProjectName "\traversing-DOM.html")  
+   ;          Run, "chrome.exe" "%gitFolder1%\%folderProject%%slash%%folderdomProjectName%\traversing-DOM.html"
+   ;        Reload
+   ; }Else{ ; se nao for o www. no dropdown
+   ;    ; abrir vs code com a pasta do dropdown
+   ;    Sleep, 300
+   ;    RunWait, %ComSpec% /c code -n "%gitFolder1%\DOM\%foldersDOM%", , Hide
+   ;     ; abrir index.html
+   ;     Run, "chrome.exe" "%gitFolder1%\DOM\%foldersDOM%\index.html"
    
-       if FileExist(gitFolder1 "\" folderProject "\" foldersDOM "\index2-doIt.html")  
-               Run, "chrome.exe" "%gitFolder1%\DOM\%foldersDOM%\index2-doIt.html"
+   ;     if FileExist(gitFolder1 "\" folderProject "\" foldersDOM "\index2-doIt.html")  
+   ;             Run, "chrome.exe" "%gitFolder1%\DOM\%foldersDOM%\index2-doIt.html"
    
-       if FileExist(gitFolder1 "\" folderProject "\" foldersDOM "\nodes.html")  
-         Run, "chrome.exe" "%gitFolder1%\DOM\%foldersDOM%\nodes.html"
-       if FileExist(gitFolder1 "\" folderProject "\" foldersDOM "\traversing-DOM.html")  
-         Run, "chrome.exe" "%gitFolder1%\DOM\%foldersDOM%\traversing-DOM.html"
-   }
+   ;     if FileExist(gitFolder1 "\" folderProject "\" foldersDOM "\nodes.html")  
+   ;       Run, "chrome.exe" "%gitFolder1%\DOM\%foldersDOM%\nodes.html"
+   ;     if FileExist(gitFolder1 "\" folderProject "\" foldersDOM "\traversing-DOM.html")  
+   ;       Run, "chrome.exe" "%gitFolder1%\DOM\%foldersDOM%\traversing-DOM.html"
+   ; }
 Return
    
 /*
