@@ -97,21 +97,28 @@ global gitFolder1
       Linguagens := "www.||"
    }
 
+
+; Lista de linguagens
 Gui, Add, ComboBox,vLinguagem gLinguagemSelecionada, %Linguagens%
+; Lista de Temas (tema da linguagem, ex: DOM)
 Gui, Add, ComboBox, x+10 vTemas gTemaSelecionado, 
+; Lista de Projetos (projetos testes que vc criou da linguagem e tema selecionado)
 Gui, Add, ComboBox, x+10 vProjetos gProjetoSelecionado, criar-novo||
+
 Gui, Add, Button, x+10 gOpenProject vBtnProjeto, Abrir Projeto 
 Gui, Add, Button, x+10 gOpenFolder, Abrir Pasta 
 Gui Show
+; Escolher a linguagem DOM ao abrir a GUI
 GuiControl,Choose, Linguagem, DOM
 GoSub, LinguagemSelecionada
 GoSub, TemaSelecionado
 Return
 
-count := 0
+; Ao selecionar o Dropdown da Linguagem
 LinguagemSelecionada:
 Gui Submit, NoHide
 ; msgbox %Linguagem%
+; * CAPTURAR TODAS AS PASTAS QUE ESTÃO LOCALIZADAS NA LINGUAGEM SELECIONADA
 if FileExist("templates\" Linguagem "\")  
    {
       Topicos := ""
@@ -128,15 +135,15 @@ if FileExist("templates\" Linguagem "\")
       Topicos := "|"
    }
 GuiControl,, Temas, | ; Limpar Combobox
-GuiControl,, Temas, %Topicos%
-GuiControl,Choose, Temas, 1
+GuiControl,, Temas, %Topicos% ; Alterar itens da lista/dropdown Temas
+GuiControl,Choose, Temas, 1 ; Selecionar o primeiro item da lista/dropdown Temas
 Return
 
 TemaSelecionado:
 Gui Submit, NoHide
-
 ; msgbox %Linguagem%
 ; msgbox %Temas%
+; * CAPTURAR TODAS AS PASTAS QUE ESTÃO LOCALIZADAS NA LINGUAGEM E TEMA SELECIONADOS
 if FileExist("templates\" Linguagem "\" Temas "\")  
    {
       ProjectName := "criar-novo|"
@@ -151,37 +158,46 @@ if FileExist("templates\" Linguagem "\" Temas "\")
       ProjectName := "|"
    }
 GuiControl,, Projetos, | ; Limpar Combobox
-GuiControl,, Projetos, %ProjectName%
-GuiControl,Choose, Projetos, 1
-; msgbox %Projetos%
+GuiControl,, Projetos, %ProjectName% ; Alterar itens da lista/dropdown Projetos
+GuiControl,Choose, Projetos, 1 ; Selecionar o primeiro item da lista/dropdown Projetos
+/*
+   * Se o PROJETO selecionado for "criar-novo", alterar o texto do botão para "Criar Projeto"
+*/
 If(Projetos = "criar-novo")
    GuiControl,, BtnProjeto, Criar Projeto
 Else
    GuiControl,1:, BtnProjeto, Abrir Projeto
 Return
 
+; * Ao selecionar um projeto no Dropdown
 ProjetoSelecionado:
 Gui Submit, NoHide
 ; msgbox %Projetos%
+/*
+   * Se o PROJETO selecionado for "criar-novo", alterar o texto do botão para "Criar Projeto"
+*/
 If(Projetos = "criar-novo")
    GuiControl,, BtnProjeto, Criar Projeto
 Else
    GuiControl,1:, BtnProjeto, Abrir Projeto
 Return
 
+; * ABRIR PASTA DO PROJETO
 OpenFolder:
 Gui Submit, NoHide
 Run, templates\%Linguagem%\%Temas%
 Return
 
-
+; * ABRIR PROJETO
 OpenProject:
 Gui Submit, NoHide
-; FormatTime, DataCompleta, , dd_MM_yyyy_dddd_H-m-ss
+; FormatTime, DataCompleta, , dd_MM_yyyy_dddd_H-m-ss ; data com dia da semana
 FormatTime, DataCompleta, , dd_MM_yyyy_H-m-ss
 ; msgbox % DataCompleta
-NewFileName := Temas "__" DataCompleta
-msgbox % NewFileName
+NewFileName := Temas "__" DataCompleta ; nome do arquivo com data
+; msgbox % NewFileName
+
+; * CASO O PROJETO SEJA 'criar-novo', Copiar os arquivos templates para uma nova pasta dentro da pasta 'projetos'
 If(Projetos = "criar-novo")
 {
    Loop, Files, templates\%Linguagem%\%Temas%\*.*, F
@@ -192,7 +208,7 @@ If(Projetos = "criar-novo")
          FileCopy, templates\%Linguagem%\%Temas%\%FileName%, templates\%Linguagem%\%Temas%\projetos\%DataCompleta%\%FileName%
       }
 }
-Else
+Else ; * CASO O PROJETO NÃO SEJA 'criar-novo', Abrir o vs code com a pasta do projeto e abrir os arquivos HTML no navegador
 {
    ; abrir vs code com a pasta criada
 RunWait, %ComSpec% /c code -n "templates\%Linguagem%\%Temas%\projetos\%Projetos%", , Hide
@@ -201,7 +217,7 @@ Loop, Files, templates\%Linguagem%\%Temas%\projetos\%Projetos%\*.*, F
    {
       SplitPath, A_LoopFileFullPath, FileName
       ; msgbox %FileName%
-      ; Se o nome do arquivo incluir ".html", abra o arquivo
+      ; !Se o nome do arquivo incluir ".html", abra o arquivo
       If(InStr(FileName, ".html"))
          Run,  %A_LoopFileFullPath%
    }
