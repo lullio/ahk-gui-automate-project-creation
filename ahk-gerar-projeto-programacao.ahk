@@ -97,7 +97,6 @@ global gitFolder1
       Linguagens := "www.||"
    }
 
-
 ; Textos
 Gui, Font, S12
 Gui, Add, Text, section, Linguagem:
@@ -110,7 +109,7 @@ Gui, Add, ComboBox, y+10 vTemas gTemaSelecionado,
 
 Gui, Add, Text, ys, Projeto:
 ; Lista de Projetos (projetos testes que vc criou da linguagem e tema selecionado)
-Gui, Add, ComboBox, y+10 vProjetos gProjetoSelecionado, criar-novo||
+Gui, Add, ComboBox, y+10 w250 vProjetos gProjetoSelecionado, criar-novo||
 
 Gui, Add, Button, x+10 gOpenProject vBtnProjeto +Default, Abrir Projeto 
 Gui, Add, Button, x+10 gOpenFolder, Abrir Pasta 
@@ -191,12 +190,6 @@ Else
    GuiControl,1:, BtnProjeto, Abrir Projeto
 Return
 
-; * ABRIR PASTA DO PROJETO
-OpenFolder:
-Gui Submit, NoHide
-Run, templates\%Linguagem%\%Temas%
-Return
-
 ; * ABRIR PROJETO
 OpenProject:
 Gui Submit, NoHide
@@ -207,22 +200,25 @@ NewFileName := Temas "__" DataCompleta ; nome do arquivo com data
 ; msgbox % NewFileName
 
 ; * CASO O PROJETO SEJA 'criar-novo', Copiar os arquivos templates para uma nova pasta dentro da pasta 'projetos'
-If(Projetos = "criar-novo")
+If(InStr(Projetos, "criar-novo"))
 {
    Loop, Files, templates\%Linguagem%\%Temas%\*.*, F
       {
+         nomeProjeto := RegExReplace(Projetos, "criar-novo", "")
+         If(nomeProjeto)
+            nomeProjeto :=  nomeProjeto "-"
          SplitPath, A_LoopFileFullPath, FileName
          ; msgbox %FileName%
          ; * CRIAR UMA PASTA DENTRO DA PASTA 'projetos' 
-         FileCreateDir, templates\%Linguagem%\%Temas%\projetos\%DataCompleta%
+         FileCreateDir, templates\%Linguagem%\%Temas%\projetos\%nomeProjeto%%DataCompleta%
          ; * COPIAR OS ARQUIVOS DA PASTA 'templates' para a pasta 'projetos'
-         FileCopy, templates\%Linguagem%\%Temas%\%FileName%, templates\%Linguagem%\%Temas%\projetos\%DataCompleta%\%FileName%
+         FileCopy, templates\%Linguagem%\%Temas%\%FileName%, templates\%Linguagem%\%Temas%\projetos\%nomeProjeto%%DataCompleta%\%FileName%
          ; * SE OS ARQUIVOS COPIADOS PARA A NOVA PASTA FOREM .HTML, ABRIR ELES
          If(InStr("templates\" Linguagem "\" Temas "\projetos\" DataCompleta "\" FileName, ".html"))
-            Run,  % "templates\" Linguagem "\" Temas "\projetos\" DataCompleta "\" FileName
+            Run,  % "templates\" Linguagem "\" Temas "\projetos\" nomeProjeto DataCompleta "\" FileName
       }
 ; abrir vs code com a pasta criada
-RunWait, %ComSpec% /c code -n "templates\%Linguagem%\%Temas%\projetos\%DataCompleta%", , Hide
+RunWait, %ComSpec% /c code -n "templates\%Linguagem%\%Temas%\projetos\%nomeProjeto%%DataCompleta%", , Hide
 }
 Else ; * CASO O PROJETO NÃO SEJA 'criar-novo', Abrir o vs code com a pasta do projeto e abrir os arquivos HTML no navegador
 {
@@ -239,4 +235,15 @@ Loop, Files, templates\%Linguagem%\%Temas%\projetos\%Projetos%\*.*, F
    }
  Sleep, 100
 }
+Return
+
+; * ABRIR PASTA DO PROJETO
+OpenFolder:
+Gui Submit, NoHide
+if FileExist("templates\" Linguagem "\" Temas "\projetos")  
+   projetos := "\projetos"
+Else
+   projetos := ""
+   
+Run, templates\%Linguagem%\%Temas%%projetos%
 Return
