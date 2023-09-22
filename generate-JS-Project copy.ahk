@@ -204,13 +204,20 @@ If(Projetos = "criar-novo")
       {
          SplitPath, A_LoopFileFullPath, FileName
          msgbox %FileName%
+         ; * CRIAR UMA PASTA DENTRO DA PASTA 'projetos' 
          FileCreateDir, templates\%Linguagem%\%Temas%\projetos\%DataCompleta%
+         ; * COPIAR OS ARQUIVOS DA PASTA 'templates' para a pasta 'projetos'
          FileCopy, templates\%Linguagem%\%Temas%\%FileName%, templates\%Linguagem%\%Temas%\projetos\%DataCompleta%\%FileName%
+         ; * SE OS ARQUIVOS COPIADOS PARA A NOVA PASTA FOREM .HTML, ABRIR ELES
+         If(InStr("templates\" Linguagem "\" Temas "\projetos\" DataCompleta "\" FileName, ".html"))
+            Run,  % "templates\" Linguagem "\" Temas "\projetos\" DataCompleta "\" FileName
       }
+; abrir vs code com a pasta criada
+RunWait, %ComSpec% /c code -n "templates\%Linguagem%\%Temas%\projetos\%DataCompleta%", , Hide
 }
 Else ; * CASO O PROJETO NÃO SEJA 'criar-novo', Abrir o vs code com a pasta do projeto e abrir os arquivos HTML no navegador
 {
-   ; abrir vs code com a pasta criada
+; abrir vs code com a pasta criada
 RunWait, %ComSpec% /c code -n "templates\%Linguagem%\%Temas%\projetos\%Projetos%", , Hide
 ; Loop em todos arquivos da pasta
 Loop, Files, templates\%Linguagem%\%Temas%\projetos\%Projetos%\*.*, F
