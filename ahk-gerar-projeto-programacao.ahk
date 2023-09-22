@@ -112,6 +112,7 @@ Gui Show
 GuiControl,Choose, Linguagem, DOM
 GoSub, LinguagemSelecionada
 GoSub, TemaSelecionado
+; GoSub, ProjetoSelecionado
 Return
 
 ; Ao selecionar o Dropdown da Linguagem
@@ -137,6 +138,7 @@ if FileExist("templates\" Linguagem "\")
 GuiControl,, Temas, | ; Limpar Combobox
 GuiControl,, Temas, %Topicos% ; Alterar itens da lista/dropdown Temas
 GuiControl,Choose, Temas, 1 ; Selecionar o primeiro item da lista/dropdown Temas
+GoSub, TemaSelecionado
 Return
 
 TemaSelecionado:
