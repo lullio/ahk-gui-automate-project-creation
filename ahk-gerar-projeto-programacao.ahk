@@ -98,16 +98,23 @@ global gitFolder1
    }
 
 
+; Textos
+Gui, Font, S12
+Gui, Add, Text, section, Linguagem:
 ; Lista de linguagens
-Gui, Add, ComboBox,vLinguagem gLinguagemSelecionada, %Linguagens%
-; Lista de Temas (tema da linguagem, ex: DOM)
-Gui, Add, ComboBox, x+10 vTemas gTemaSelecionado, 
-; Lista de Projetos (projetos testes que vc criou da linguagem e tema selecionado)
-Gui, Add, ComboBox, x+10 vProjetos gProjetoSelecionado, criar-novo||
+Gui, Add, ComboBox,vLinguagem gLinguagemSelecionada xs, %Linguagens%
 
-Gui, Add, Button, x+10 gOpenProject vBtnProjeto, Abrir Projeto 
+Gui, Add, Text, ys, Tema:
+; Lista de Temas (tema da linguagem, ex: DOM)
+Gui, Add, ComboBox, y+10 vTemas gTemaSelecionado, 
+
+Gui, Add, Text, ys, Projeto:
+; Lista de Projetos (projetos testes que vc criou da linguagem e tema selecionado)
+Gui, Add, ComboBox, y+10 vProjetos gProjetoSelecionado, criar-novo||
+
+Gui, Add, Button, x+10 gOpenProject vBtnProjeto +Default, Abrir Projeto 
 Gui, Add, Button, x+10 gOpenFolder, Abrir Pasta 
-Gui Show
+Gui, Show, , Felipe - Praticar com Exercícios de Programação
 ; Escolher a linguagem DOM ao abrir a GUI
 GuiControl,Choose, Linguagem, DOM
 GoSub, LinguagemSelecionada
