@@ -192,7 +192,7 @@ Return
 OpenProject:
 Gui Submit, NoHide
 ; FormatTime, DataCompleta, , dd_MM_yyyy_dddd_H-m-ss ; data com dia da semana
-FormatTime, DataCompleta, , dd_MM_yyyy_H-m-ss
+FormatTime, DataCompleta, , dd_MM_yyyy_HH-m-ss
 ; msgbox % DataCompleta
 NewFileName := Temas "__" DataCompleta ; nome do arquivo com data
 ; msgbox % NewFileName
@@ -203,7 +203,7 @@ If(Projetos = "criar-novo")
    Loop, Files, templates\%Linguagem%\%Temas%\*.*, F
       {
          SplitPath, A_LoopFileFullPath, FileName
-         msgbox %FileName%
+         ; msgbox %FileName%
          ; * CRIAR UMA PASTA DENTRO DA PASTA 'projetos' 
          FileCreateDir, templates\%Linguagem%\%Temas%\projetos\%DataCompleta%
          ; * COPIAR OS ARQUIVOS DA PASTA 'templates' para a pasta 'projetos'
