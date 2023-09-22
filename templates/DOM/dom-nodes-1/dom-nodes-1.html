@@ -1,0 +1,57 @@
+ <html>
+      <head>
+         <title>What are Nodes?</title>
+      </head>
+      <body>
+         <h1>This is an Element Node</h1>
+         This is a Text Node, all by its lonesome self
+         <!-- Well, as you guessed it, this is a Comment Node -->
+         <p>This is also an Element Node</p>
+
+         <ul>
+            <li>BAM</li>
+            <li>POW</li>
+            <li>UHUL</li>
+            <li>SHAZAM</li>
+         </ul>
+
+         <script>
+         console.log(document)
+         /*exemplo mt legal
+         let lis = document.getElementsByTagName("li");
+         console.log(lis.length);
+         console.log(lis)
+         /*muito interessante, fica num loop infinito porque HTMLCollection é vivo, fica atualizando sempre os li, então sempre vai ter li pois vc tá criando e atualizando, resolver usando querySelctorAll*/
+         for(li of lis){
+            console.log(li.parentNode.appendChild(document.createElement("li")))
+         } 
+         */
+         // ***** HTMLCollection TIME
+         // lets access our list items
+         let listItems_tags = document.getElementsByTagName("li");
+         console.log(listItems_tags);
+         console.log(listItems_tags.length);
+
+         // lets modify the DOM and add a list item
+         listItems_tags[0].parentNode.appendChild(document.createElement("li"));
+         console.log(listItems_tags)
+         console.log(listItems_tags.length)
+
+                // ***** NodeList TIME
+               let listItems = document.querySelectorAll('li');
+               console.log(listItems);
+               console.log(listItems.length);
+               
+               listItems[0].parentNode.appendChild(document.createElement('li'));
+               // not updated the length
+               console.log(listItems);
+               console.log(listItems.length);
+
+               // lets fix that by requerying the DOM
+               listItems = document.querySelectorAll('li');
+               console.log(listItems);
+               console.log(listItems.length);
+         </script>
+         <script src="script.js"></script>
+      </body>
+   </html>
