@@ -80,8 +80,8 @@ global gitFolder1
    escapeDropdownItem := "www.|"
 /*
    DROPDOWN - LIST OF FOLDERS NAME
-   */
-   Linguagens := ""
+*/
+   Linguagens := "criar-novo|"
    if FileExist("templates")  
    {
       Loop, Files, templates\*.*, D
@@ -105,21 +105,50 @@ Gui, Add, ComboBox,vLinguagem gLinguagemSelecionada xs, %Linguagens%
 
 Gui, Add, Text, ys, Tema:
 ; Lista de Temas (tema da linguagem, ex: DOM)
-Gui, Add, ComboBox, y+10 vTemas gTemaSelecionado, 
+Gui, Add, ComboBox, y+10 vTemas gTemaSelecionado, criar-novo||
 
 Gui, Add, Text, ys, Projeto:
 ; Lista de Projetos (projetos testes que vc criou da linguagem e tema selecionado)
 Gui, Add, ComboBox, y+10 w250 vProjetos gProjetoSelecionado, criar-novo||
 
-Gui, Add, Button, x+10 gOpenProject vBtnProjeto +Default, Abrir Projeto 
-Gui, Add, Button, x+10 gOpenFolder, Abrir Pasta 
+Gui, Add, Button, w150 x+10 gOpenProject vBtnProjeto +Default, Abrir Projeto 
+Gui, Add, Button, w100 x+10 gOpenFolder, Abrir Pasta 
+
+Gui, Add, ListView, w910 xs y+10 r8 vListAll, Projeto|Tema|Linguagem|Pasta
 Gui, Show, , Felipe - Praticar com Exercícios de Programação
+WinSet, AlwaysOnTop, On,Felipe - Praticar com Exercícios de Programação ahk_class 
 ; Escolher a linguagem DOM ao abrir a GUI
 GuiControl,Choose, Linguagem, DOM
 GoSub, LinguagemSelecionada
 GoSub, TemaSelecionado
+GoSub, PreencherLista
 ; GoSub, ProjetoSelecionado
 Return
+
+
+PreencherLista:
+; Loop em todos arquivos da pasta
+Loop, Files, templates\*.*, DR
+   {
+      ; msgbox % A_LoopFilePath 
+      If(InStr(A_LoopFilePath, "projetos\")){
+         SplitPath, A_LoopFilePath, name, dir, ext, name_no_ext, drive
+         folder := StrReplace(dir, "templates\", "")
+         folder := StrReplace(folder, "\projetos", "")
+         ; msgbox % folder
+         folders := StrSplit(folder, "\")
+         folderLinguagem := folders[1]
+         folderTema := folders[2]
+         ; msgbox % folderLinguagem folderTema
+         LV_Add("", name, folderTema, folderLinguagem, A_LoopFilePath )
+      }
+      ; msgbox %FileName%
+      ; LV_Add("", FileName)
+   }
+   LV_ModifyCol()
+   LV_ModifyCol(4, 0)
+Return
+
 
 ; Ao selecionar o Dropdown da Linguagem
 LinguagemSelecionada:
@@ -128,7 +157,7 @@ Gui Submit, NoHide
 ; * CAPTURAR TODAS AS PASTAS QUE ESTÃO LOCALIZADAS NA LINGUAGEM SELECIONADA
 if FileExist("templates\" Linguagem "\")  
    {
-      Topicos := ""
+      Topicos := "criar-novo|"
       Loop, Files, templates\%Linguagem%\*.*, D
       {
          SplitPath, A_LoopFileFullPath, FolderName
@@ -141,6 +170,8 @@ if FileExist("templates\" Linguagem "\")
    }Else{
       Topicos := "|"
    }
+; If(InStr(Linguagem, "criar-novo") || !InStr(Linguagens, Linguagem))
+
 GuiControl,, Temas, | ; Limpar Combobox
 GuiControl,, Temas, %Topicos% ; Alterar itens da lista/dropdown Temas
 GuiControl,Choose, Temas, 1 ; Selecionar o primeiro item da lista/dropdown Temas
@@ -171,7 +202,11 @@ GuiControl,Choose, Projetos, 1 ; Selecionar o primeiro item da lista/dropdown Pr
 /*
    * Se o PROJETO selecionado for "criar-novo", alterar o texto do botão para "Criar Projeto"
 */
-If(Projetos = "criar-novo")
+If(InStr(Linguagem, "criar-novo") || !InStr(Linguagens, Linguagem))
+   GuiControl,, BtnProjeto, Criar Linguagem
+Else If(InStr(Temas, "criar-novo") || !InStr(Topicos, Temas))
+   GuiControl,, BtnProjeto, Criar Tema
+Else If(InStr(Projetos, "criar-novo") || !InStr(ProjectName, Projetos))
    GuiControl,, BtnProjeto, Criar Projeto
 Else
    GuiControl,1:, BtnProjeto, Abrir Projeto
@@ -190,7 +225,7 @@ Else
    GuiControl,1:, BtnProjeto, Abrir Projeto
 Return
 
-; * ABRIR PROJETO
+; * ABRIR PROJETO OU TEMA
 OpenProject:
 Gui Submit, NoHide
 ; FormatTime, DataCompleta, , dd_MM_yyyy_dddd_H-m-ss ; data com dia da semana
@@ -200,8 +235,31 @@ NewFileName := Temas "__" DataCompleta ; nome do arquivo com data
 ; msgbox % NewFileName
 
 ; * CASO O PROJETO SEJA 'criar-novo', Copiar os arquivos templates para uma nova pasta dentro da pasta 'projetos'
-If(InStr(Projetos, "criar-novo"))
+
+; * Se o valor do combobox "Temas" for igual a "criar-novo" OU se o valor do combobox "Temas" for diferente de tudo que existe na lista Temas
+If(InStr(Linguagem, "criar-novo") || !InStr(Linguagens, Linguagem))
 {
+   ; msgbox % "ok" Topicos
+   ; CRIAR UMA NOVA PASTA COM O NOME DIGITADO NO COMBOBOX
+   FileCreateDir, templates\%Linguagem%
+   ; abrir vs code com a pasta criada
+   RunWait, %ComSpec% /c code -n "templates\%Linguagem%", , Hide
+   Run, templates\%Linguagem%\
+}
+Else If(InStr(Temas, "criar-novo") || !InStr(Topicos, Temas))
+{
+   ; msgbox % "ok" Topicos
+   ; CRIAR UMA NOVA PASTA COM O NOME DIGITADO NO COMBOBOX
+   FileCreateDir, templates\%Linguagem%\%Temas%
+   FileAppend, , templates\%Linguagem%\%Temas%\script.js
+   FileAppend, , templates\%Linguagem%\%Temas%\script.ahk
+   FileAppend, , templates\%Linguagem%\%Temas%\index.html
+; abrir vs code com a pasta criada
+RunWait, %ComSpec% /c code -n "templates\%Linguagem%\%Temas%", , Hide
+}   
+Else If(InStr(Projetos, "criar-novo") || !InStr(ProjectName, Projetos))
+{
+   ; msgbox % ProjectName
    Loop, Files, templates\%Linguagem%\%Temas%\*.*, F
       {
          nomeProjeto := RegExReplace(Projetos, "criar-novo", "")
